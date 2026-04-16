@@ -1,0 +1,44 @@
+package com.ultrachat
+
+import android.os.Bundle
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {
+
+    val memory = mutableListOf<String>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val layout = LinearLayout(this)
+        layout.orientation = LinearLayout.VERTICAL
+
+        val output = TextView(this)
+        val input = EditText(this)
+        val btn = Button(this)
+
+        btn.text = "Senden"
+
+        layout.addView(output)
+        layout.addView(input)
+        layout.addView(btn)
+
+        setContentView(layout)
+
+        btn.setOnClickListener {
+
+            val msg = input.text.toString()
+
+            memory.add("User: $msg")
+
+            val reply = "AI: $msg"
+
+            memory.add(reply)
+
+            output.append("\n$msg\n$reply\n")
+
+            input.text.clear()
+        }
+    }
+}
